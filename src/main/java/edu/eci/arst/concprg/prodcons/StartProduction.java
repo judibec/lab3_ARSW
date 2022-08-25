@@ -17,13 +17,15 @@ import java.util.logging.Logger;
 
 public class StartProduction {
     
-    
+    private static int stock;
     public static void main(String[] args) {
+        stock = 50;
         
-        Queue<Integer> queue=new LinkedBlockingQueue<>();
+        Queue<Integer> queue=new LinkedBlockingQueue<>(stock);
         
         
-        new Producer(queue,Long.MAX_VALUE).start();
+        Producer producer = new Producer(queue,stock);
+        producer.start();
         
         //let the producer create products for 5 seconds (stock).
         try {
@@ -34,6 +36,12 @@ public class StartProduction {
         
         
         new Consumer(queue).start();
+        while(queue.size()>0){
+            if(queue.size()==stock-1){
+//                System.out.println(queue.size());
+                producer.reaudar();
+            }
+        }
     }
     
 
