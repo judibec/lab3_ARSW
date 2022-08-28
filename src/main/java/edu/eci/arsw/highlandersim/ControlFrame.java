@@ -72,13 +72,16 @@ public class ControlFrame extends JFrame {
         JButton btnStop = new JButton("STOP");
         btnStart.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-
                 immortals = setupInmortals();
 
+
                 if (immortals != null) {
-                    for (Immortal im : immortals) {
-                        im.start();
+                    synchronized (immortals){
+                        for (Immortal im : immortals) {
+                            im.start();
+                        }
                     }
+
                 }
 
                 btnStart.setEnabled(false);
@@ -164,7 +167,9 @@ public class ControlFrame extends JFrame {
     public void pausar(){
         for (Immortal im:immortals){
             im.pausar();
+
         }
+
     }
 
     public void resumir(){
@@ -174,12 +179,15 @@ public class ControlFrame extends JFrame {
     }
 
     public void matar(){
+
         for (Immortal im:immortals){
             im.matar();
+
         }
+
     }
 
-    public List<Immortal> setupInmortals() {
+    public synchronized List<Immortal> setupInmortals() {
 
         ImmortalUpdateReportCallback ucb=new TextAreaUpdateReportCallback(output,scrollPane);
         

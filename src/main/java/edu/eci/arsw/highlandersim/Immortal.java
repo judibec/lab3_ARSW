@@ -51,14 +51,17 @@ public class Immortal extends Thread {
                 this.fight(im);
             }
             try {
-                Thread.sleep(1000);
+                Thread.sleep(1);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
-        if(health==0){
-            immortalsPopulation.remove(this);
+        synchronized (immortalsPopulation){
+            if(health==0){
+                immortalsPopulation.remove(this);
+            }
         }
+
 
     }
 
