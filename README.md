@@ -100,5 +100,14 @@ Sincronización y Dead-Locks.
 
 ## Solución
 
+Monitoreo base
+
 ![image](https://user-images.githubusercontent.com/90010884/186676891-d27bb834-1ce5-4309-9b30-813434bfdeab.png)
 
+![image](https://user-images.githubusercontent.com/90010884/187052083-ae15ed93-e574-4c17-88ad-9e45248a9839.png)
+
+Monitoreo usando wait/notify
+
+![image](https://user-images.githubusercontent.com/90010884/187052120-e4b0db44-6695-41eb-bc47-94d6ed6d8ca6.png)
+
+podemos ver una reduccion del uso de la CPU bastante significativa, ya que el mismo consumidor le va a avisando al productor cuando este va desocupando un espacio en la cola y asi no hay momentos muertos en el programa
