@@ -1,0 +1,5 @@
+Solucion Parte III
+2. El valor del invariante es la sumatoria de todas las vidas de los inmortales, pues siempre deberia mantenerse igual
+3. si, se mantiene a pesar que se mueran los inmortales 
+5. si se cumple
+9. con numeros grandes como 10000 para arriba puede haber variaciones de 10 mas o 10 menos, pero con numeros mas bajos si se mantiene el invariante
