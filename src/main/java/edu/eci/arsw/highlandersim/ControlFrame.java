@@ -67,6 +67,9 @@ public class ControlFrame extends JFrame {
         contentPane.add(toolBar, BorderLayout.NORTH);
 
         final JButton btnStart = new JButton("Start");
+        JButton btnPauseAndCheck = new JButton("Pause and check");
+        JButton btnResume = new JButton("Resume");
+        JButton btnStop = new JButton("STOP");
         btnStart.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 
@@ -79,39 +82,45 @@ public class ControlFrame extends JFrame {
                 }
 
                 btnStart.setEnabled(false);
+                btnPauseAndCheck.setEnabled(true);
+                btnStop.setEnabled(true);
 
             }
         });
         toolBar.add(btnStart);
+//        JButton btnResume = new JButton("Resume");
 
-        JButton btnPauseAndCheck = new JButton("Pause and check");
+//        JButton btnPauseAndCheck = new JButton("Pause and check");
+        btnPauseAndCheck.setEnabled(false);
+        btnResume.setEnabled(false);
         btnPauseAndCheck.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 
-                /*
-				 * COMPLETAR
-                 */
+                pausar();
                 int sum = 0;
                 for (Immortal im : immortals) {
                     sum += im.getHealth();
                 }
 
                 statisticsLabel.setText("<html>"+immortals.toString()+"<br>Health sum:"+ sum);
-                
+                btnPauseAndCheck.setEnabled(false);
+                btnResume.setEnabled(true);
                 
 
             }
         });
         toolBar.add(btnPauseAndCheck);
 
-        JButton btnResume = new JButton("Resume");
+
 
         btnResume.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 /**
                  * IMPLEMENTAR
                  */
-
+                resumir();
+                btnPauseAndCheck.setEnabled(true);
+                btnResume.setEnabled(false);
             }
         });
 
@@ -125,9 +134,19 @@ public class ControlFrame extends JFrame {
         toolBar.add(numOfImmortals);
         numOfImmortals.setColumns(10);
 
-        JButton btnStop = new JButton("STOP");
+//        JButton btnStop = new JButton("STOP");
         btnStop.setForeground(Color.RED);
         toolBar.add(btnStop);
+
+        btnStop.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                matar();
+                btnStop.setEnabled(false);
+                btnPauseAndCheck.setEnabled(false);
+                btnResume.setEnabled(false);
+                btnStart.setEnabled(true);
+            }
+        });
 
         scrollPane = new JScrollPane();
         contentPane.add(scrollPane, BorderLayout.CENTER);
@@ -140,6 +159,24 @@ public class ControlFrame extends JFrame {
         statisticsLabel = new JLabel("Immortals total health:");
         contentPane.add(statisticsLabel, BorderLayout.SOUTH);
 
+    }
+
+    public void pausar(){
+        for (Immortal im:immortals){
+            im.pausar();
+        }
+    }
+
+    public void resumir(){
+        for (Immortal im:immortals){
+            im.resumir();
+        }
+    }
+
+    public void matar(){
+        for (Immortal im:immortals){
+            im.matar();
+        }
     }
 
     public List<Immortal> setupInmortals() {
