@@ -28,8 +28,11 @@ public class Consumer extends Thread{
 //                System.out.println(queue.size());
                 int elem=queue.poll();
                 try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
+                    Thread.sleep(100);
+                    synchronized (queue){
+                        queue.notifyAll();
+                    }
+                } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
                 System.out.println("Consumer consumes "+elem);

@@ -37,9 +37,9 @@ public class Producer extends Thread {
             if(queue.size()<stockLimit) {
                 queue.add(dataSeed);
             }else{
-                synchronized (this){
+                synchronized (queue){
                     try {
-                        wait();
+                        queue.wait();
                     } catch (InterruptedException e) {
                         throw new RuntimeException(e);
                     }

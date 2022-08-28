@@ -19,7 +19,7 @@ public class StartProduction {
     
     private static int stock;
     public static void main(String[] args) {
-        stock = 50;
+        stock = 100;
         
         Queue<Integer> queue=new LinkedBlockingQueue<>(stock);
         
@@ -36,12 +36,12 @@ public class StartProduction {
         
         
         new Consumer(queue).start();
-        while(queue.size()>0){
-            if(queue.size()==stock-1){
-//                System.out.println(queue.size());
-                producer.reaudar();
-            }
-        }
+//        while(queue.size()>0){
+//            if(queue.size()==stock-1){
+////                System.out.println(queue.size());
+//                producer.reaudar();
+//            }
+//        }
     }
     
 
